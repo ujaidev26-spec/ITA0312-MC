@@ -20,7 +20,7 @@ def ber_trial(codes, amplitudes, ebno_db, seed, asynchronous=False):
     tx=bits[:,:,None]*codes[:,None,:]*amplitudes[:,None,None]
     if asynchronous and K>1:
         # A one-chip cyclic offset is a simple timing-mismatch model.
-        tx[1]=np.roll(tx[1],1,axis=1)
+        tx[1]=np.roll(tx[1],1,axis=2)
     signal=tx.sum(axis=0)
     ebno=10**(ebno_db/10)
     noise_sigma=np.sqrt(L/(2*ebno))
